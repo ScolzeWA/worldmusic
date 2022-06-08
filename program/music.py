@@ -26,8 +26,8 @@ def ytsearch(query):
                 songname = r["title"][:70]
             else:
                 songname = r["title"]
-            url = f"https://i.ytimg.com/vi/{data['id']}"
-        return [songname, url, duration, thumbnail]
+            url = f"https://www.youtube.com/watch?v={ytid}"
+        return [songname, url]
     except Exception as e:
         print(e)
         return 0
@@ -91,8 +91,8 @@ async def play(c: Client, m: Message):
         await m.reply_text("قم بي اعطائي الصلاحية التالية:" + "\n\n» ❌ __حظر المستخدمين__")
         return
     try:
-        ubot = (await user.get_me()).id
-        b = await c.get_chat_member(chat_id, ubot)
+        ubot = await user.get_me()
+        b = await c.get_chat_member(chat_id, ubot.id)
         if b.status == "kicked":
             await m.reply_text(
                 f"@{ASSISTANT_NAME} محظور في المجموعة {m.chat.title}\n\n» قم بي الغاء حظره و اضافتة الي المجموعة"
