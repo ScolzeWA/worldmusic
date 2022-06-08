@@ -94,7 +94,6 @@ async def skip(client, m: Message):
 @Client.on_message(command2(["اسكت","ايقاف","انهاء"]) & other_filters)
 @authorized_users_only
 async def stop(client, m: Message):
-await message.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -110,7 +109,6 @@ await message.delete()
 @Client.on_message(command2(["توقف","ايقاف_مؤقت"]) & other_filters)
 @authorized_users_only
 async def pause(client, m: Message):
-await message.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -127,7 +125,6 @@ await message.delete()
 @Client.on_message(command2(["استئناف","استكمال","استكمل","استئنف"]) & other_filters)
 @authorized_users_only
 async def resume(client, m: Message):
-await message.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -144,7 +141,6 @@ await message.delete()
 @Client.on_message(command2(["كتم_المساعد","كتم المساعد","ميوت"]) & other_filters)
 @authorized_users_only
 async def mute(client, m: Message):
-await message.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -161,7 +157,6 @@ await message.delete()
 @Client.on_message(command2(["الغاء كتم المساعد","فك كتم المساعد"]) & other_filters)
 @authorized_users_only
 async def unmute(client, m: Message):
-await message.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -198,7 +193,6 @@ await message.delete()
 
 @Client.on_callback_query(filters.regex("cbresume"))
 async def cbresume(_, query: CallbackQuery):
-await message.delete()
     if query.message.sender_chat:
         return await query.answer("انت مسؤول مجهول\n\n» قم بي الغاء خاصية التخفي")
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
@@ -246,7 +240,6 @@ async def showid(_, message: Message):
         
 @Client.on_callback_query(filters.regex("cbstop"))
 async def cbstop(_, query: CallbackQuery):
-await message.delete()
     if query.message.sender_chat:
         return await query.answer("انت مسؤول مجهول\n\n» قم بي الغاء خاصية التخفي")
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
@@ -266,7 +259,6 @@ await message.delete()
 
 @Client.on_callback_query(filters.regex("cbmute"))
 async def cbmute(_, query: CallbackQuery):
-await message.delete()
     if query.message.sender_chat:
         return await query.answer("انت مسؤول مجهول\n\n» قم بي الغاء خاصية التخفي")
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
@@ -287,7 +279,6 @@ await message.delete()
 
 @Client.on_callback_query(filters.regex("cbunmute"))
 async def cbunmute(_, query: CallbackQuery):
-await message.delete()
     if query.message.sender_chat:
         return await query.answer("انت مسؤول مجهول\n\n» قم بي الغاء خاصية التخفي")
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
