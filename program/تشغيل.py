@@ -17,16 +17,12 @@ from pytgcalls.types.input_stream import AudioPiped
 from youtubesearchpython import VideosSearch
 
 
-def ytsearch(query):
-    try:
-        search = VideosSearch(query, limit=1)
-        for r in search.result()["result"]:
-            ytid = r["id"]
-            if len(r["title"]) > 34:
-                songname = r["title"][:70]
-            else:
-                songname = r["title"]
-            url = f"https://i.ytimg.com/vi/{data[ id ]}/hqdefault.jpg"
+search = VideosSearch(query, limit=1).result()
+        data = search["result"][0]
+        songname = data["title"]
+        url = data["link"]
+        duration = data["duration"]
+        thumbnail = f"https://i.ytimg.com/vi/{data['id']}/hqdefault.jpg"
         return [songname, url, duration, thumbnail]
     except Exception as e:
         print(e)
