@@ -32,7 +32,6 @@ bcl = InlineKeyboardMarkup(
 @Client.on_message(command2(["تحديث المسؤولين","تحديث قائمة المسؤولين","تحديث_الادمن","حدث"]) & other_filters)
 @authorized_users_only
 async def update_admin(client, message):
-await message.delete()
     global admins
     new_admins = []
     new_ads = await client.get_chat_members(message.chat.id, filter="administrators")
