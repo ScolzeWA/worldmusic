@@ -37,7 +37,6 @@ ydl_opts = {
 
 @Client.on_message(command(["song", f"song@{bn}"]) & ~filters.edited)
 def song(_, message):
-await message.delete()
     query = " ".join(message.command[1:])
     m = message.reply("🔎 يتم البحث عن الأغنية ...")
     ydl_ops = {"format": "bestaudio[ext=m4a]"}
