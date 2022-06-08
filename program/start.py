@@ -104,17 +104,7 @@ async def alive(client: Client, message: Message):
         ]
     )
 
-    alive = f"""**أنا {BOT_NAME}**
-✨ أعمل الأن بشكل طبيعي
-🍀 مطوري : [{ALIVE_NAME}](https://t.me/{OWNER_NAME})
-✨ إصداري: {__version__}
-🍀 إصدار البايوجرام: {pyrover}
-✨ إصدار البايثون: {__python_version__}
-🍀 إصدار المحادثة الصوتيه: {pytover.__version__}
-✨ وقت البدء: {uptime}
-
-**شكرا لإضافتي لتشغيل الموسيقى والفيديو في محادثتك الصوتية** ❤"""
-
+    alive = f"""ᴘʀᴏɢʀᴀᴍᴍᴇʀ [𝘿𝙀𝙑𝙀𝙇𝙊𝙋𝙀𝙍 ☤ ](https://t.me/WORLD_MUSIC_F) 𖡼\nᴛᴏ ᴄᴏᴍᴍụɴɪᴄᴀᴛᴇ ᴛᴏɢᴇᴛʜᴇʀ 𖡼\nғᴏʟʟᴏᴡ ᴛʜᴇ ʙụᴛᴛᴏɴѕ ʟᴏᴡᴇʀ 𖡼"""
     await message.reply_photo(
         photo=f"{ALIVE_IMG}",
         caption=alive,
@@ -124,6 +114,7 @@ async def alive(client: Client, message: Message):
 
 @Client.on_message(command(["ping", f"ping@{BOT_USERNAME}"]) & ~filters.edited)
 async def ping_pong(client: Client, message: Message):
+await message.delete()
     start = time()
     m_reply = await message.reply_text("جاري قياس البينك...")
     delta_ping = time() - start

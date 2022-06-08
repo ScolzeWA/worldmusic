@@ -17,6 +17,7 @@ from driver.decorators import sudo_users_only, humanbytes
 @Client.on_message(command(["sysinfo", f"sysinfo@{BOT_USERNAME}"]) & ~filters.edited)
 @sudo_users_only
 async def give_sysinfo(client, message):
+await message.delete()
     splatform = platform.system()
     platform_release = platform.release()
     platform_version = platform.version()

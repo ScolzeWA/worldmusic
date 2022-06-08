@@ -49,10 +49,11 @@ async def ytdl(link):
     else:
         return 0, stderr.decode()
 
-@Client.on_message(command2(["تشغيل","شغل_صوت","صوت_تشغيل","شغل"])
-async def play(_, message: Message):
-    await message.delete()
-    chat_type = message.chat.type
+
+@Client.on_message(command2(["تشغيل","شغل_صوت","صوت_تشغيل","شغل"]) & other_filters)
+async def play(c: Client, m: Message):
+    replied = m.reply_to_message
+    chat_id = m.chat.id
     keyboard = InlineKeyboardMarkup(
         [
             [
