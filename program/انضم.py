@@ -23,6 +23,7 @@ async def join_group(client, message):
     try:
         await USER.join_chat(invitelink)
     except UserAlreadyParticipant:
+    return await user.send_message(chat_id, "انا موجود هنا بالفعل😐")
         pass
     except Exception as e:
         print(e)
