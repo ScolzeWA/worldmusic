@@ -11,7 +11,7 @@ from pyrogram.errors import UserAlreadyParticipant
 @authorized_users_only
 @errors
 async def join_group(client, message):
-await message.delete()
+    await message.delete()
     chid = message.chat.id
     try:
         invitelink = await client.export_chat_invite_link(chid)
