@@ -32,9 +32,8 @@ def ytsearch(query):
                 songname = r["title"][:70]
             else:
                 songname = r["title"]
-                duration = data["duration"]
             url = f"https://www.youtube.com/watch?v={ytid}"
-        return [songname, duration, url]
+        return [songname, url]
     except Exception as e:
         print(e)
         return 0
@@ -57,7 +56,7 @@ async def ytdl(link):
         return 0, stderr.decode()
 
 
-@Client.on_message(command2(["شغل_فيديو","فيديو_تشغيل"]) & other_filters)
+@Client.on_message(command2(["تشغيل_فيديو","شغل_فيديو","شغل_فيد","تشغيل_فيد"]) & other_filters)
 async def vplay(c: Client, m: Message):
     replied = m.reply_to_message
     chat_id = m.chat.id
@@ -143,10 +142,8 @@ async def vplay(c: Client, m: Message):
             try:
                 if replied.video:
                     songname = replied.video.file_name[:70]
-                    duration = replied.video.duration
                 elif replied.document:
                     songname = replied.document.file_name[:70]
-                    duration = replied.document.duration
             except BaseException:
                 songname = "Video"
 
@@ -156,7 +153,7 @@ async def vplay(c: Client, m: Message):
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                 await m.reply_photo(
                     photo=f"{IMG_1}",
-                    caption=f"💡 **تم إضافته لقائمة الانتظار »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({link})\n💭 **المحادثه:** `{chat_id}``\n**⏱ المده:** `{duration}`\n🎧 **مطلوب بواسطة:** {requester}",
+                    caption=f"💡 **تم إضافته لقائمة الانتظار »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({link})\n💭 **المحادثه:** `{chat_id}`\n🎧 **مطلوب بواسطة:** {requester}",
                     reply_markup=keyboard,
                 )
             else:
@@ -180,7 +177,7 @@ async def vplay(c: Client, m: Message):
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                 await m.reply_photo(
                     photo=f"{IMG_2}",
-                    caption=f"💡 **تم بدء عرض الفديو.**\n\n🏷 **الاسم:** [{songname}]({link})\n💭 **المحادثه:** `{chat_id}`\n💡 الحالة : مشِغل`\n**⏱ المده:** `{duration}`\n🎧 **مطلوبة بواسطه:** {requester}",
+                    caption=f"💡 **تم بدء عرض الفديو.**\n\n🏷 **الاسم:** [{songname}]({link})\n💭 **المحادثه:** `{chat_id}`\n💡 الحالة : مشِغل\n🎧 **مطلوبة بواسطه:** {requester}",
                     reply_markup=keyboard,
                 )
         else:
@@ -199,7 +196,6 @@ async def vplay(c: Client, m: Message):
                 else:
                     songname = search[0]
                     url = search[1]
-                    duration = search[2]
                     veez, ytlink = await ytdl(url)
                     if veez == 0:
                         await loser.edit(f"❌ يوجد خطأ في المكتبه\n\n» `{ytlink}`")
@@ -212,7 +208,7 @@ async def vplay(c: Client, m: Message):
                             requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                             await m.reply_photo(
                                 photo=f"{IMG_1}",
-                                caption=f"💡 **تم الوضع  في قائمة الانتظار »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}``\n**⏱ المده:** `{duration}`\n🎧 **مطلوب بواسطة:** {requester}",
+                                caption=f"💡 **تم الوضع  في قائمة الانتظار »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n🎧 **مطلوب بواسطة:** {requester}",
                                 reply_markup=keyboard,
                             )
                         else:
@@ -231,7 +227,7 @@ async def vplay(c: Client, m: Message):
                                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                                 await m.reply_photo(
                                     photo=f"{IMG_2}",
-                                    caption=f"💡 **تم بدء العرض.**\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n💡 **الحاله:** `Playing``\n**⏱ المده:** `{duration}`\n🎧 **مطلوب بواسطه** {requester}",
+                                    caption=f"💡 **تم بدء العرض.**\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n💡 **الحاله:** `شغال`\n🎧 **مطلوب بواسطه** {requester}",
                                     reply_markup=keyboard,
                                 )
                             except Exception as ep:
@@ -254,7 +250,6 @@ async def vplay(c: Client, m: Message):
             else:
                 songname = search[0]
                 url = search[1]
-                duration = search[2]
                 veez, ytlink = await ytdl(url)
                 if veez == 0:
                     await loser.edit(f"❌ يوجد خطأ بالمكتبه\n\n» `{ytlink}`")
@@ -267,7 +262,7 @@ async def vplay(c: Client, m: Message):
                         )
                         await m.reply_photo(
                             photo=f"{IMG_1}",
-                            caption=f"💡 **تمت الإضافة لقائمة الانتظار »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثه:** `{chat_id}``\n**⏱ المده:** `{duration}`\n🎧 **مطلوب بواسطه:** {requester}",
+                            caption=f"💡 **تمت الإضافة لقائمة الانتظار »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثه:** `{chat_id}`\n🎧 **مطلوب بواسطه:** {requester}",
                             reply_markup=keyboard,
                         )
                     else:
@@ -286,7 +281,7 @@ async def vplay(c: Client, m: Message):
                             requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                             await m.reply_photo(
                                 photo=f"{IMG_2}",
-                                caption=f"💡 **تم بدء العرض.**\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n💡 الحالة : مشِغل`\n**⏱ المده:** `{duration}`\n🎧 **مطلوب بواسطة:** {requester}",
+                                caption=f"💡 **تم بدء العرض.**\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n💡 الحالة : مشِغل\n🎧 **مطلوب بواسطة:** {requester}",
                                 reply_markup=keyboard,
                             )
                         except Exception as ep:
@@ -400,7 +395,7 @@ async def vstream(c: Client, m: Message):
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                 await m.reply_photo(
                     photo=f"{IMG_1}",
-                    caption=f"💡 **تم الإضافة لقائمة الانتظار »** `{pos}`\n\n💭 **المحادثة:** `{chat_id}``\n**⏱ المده:** `{duration}`\n🎧 **مطلوب بواسطة:** {requester}",
+                    caption=f"💡 **تم الإضافة لقائمة الانتظار »** `{pos}`\n\n💭 **المحادثة:** `{chat_id}`\n🎧 **مطلوب بواسطة:** {requester}",
                     reply_markup=keyboard,
                 )
             else:
@@ -427,7 +422,7 @@ async def vstream(c: Client, m: Message):
                     )
                     await m.reply_photo(
                         photo=f"{IMG_2}",
-                        caption=f"💡 **[البث الحي]({link}) يتم عرضه.**\n\n💭 **المحادثة:** `{chat_id}`\n💡 الحالة : مشِغل  `\n**⏱ المده:** `{duration}`\n🎧 **مطلوب بواسطة:** {requester}",
+                        caption=f"💡 **[البث الحي]({link}) يتم عرضه.**\n\n💭 **المحادثة:** `{chat_id}`\n💡 الحالة : مشِغل  \n🎧 **مطلوب بواسطة:** {requester}",
                         reply_markup=keyboard,
                     )
                 except Exception as ep:

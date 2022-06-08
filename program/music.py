@@ -27,8 +27,7 @@ def ytsearch(query):
             else:
                 songname = r["title"]
             url = f"https://www.youtube.com/watch?v={ytid}"
-            duration = data["duration"]
-        return [songname, duration, url]
+        return [songname, url]
     except Exception as e:
         print(e)
         return 0
@@ -131,16 +130,14 @@ async def play(c: Client, m: Message):
                         songname = replied.audio.file_name[:70]
                     else:
                         songname = "Audio"
-                        duration = replied.audio.duration
             elif replied.voice:
                 songname = "Voice Note"
-                duration = replied.voice.duration
             if chat_id in QUEUE:
                 pos = add_to_queue(chat_id, songname, dl, link, "Audio", 0)
                 await suhu.delete()
                 await m.reply_photo(
                     photo=f"{IMG_1}",
-                    caption=f"💡 **تم اضافتها الي قائمة التشغيل الدور »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({link})\n💭 **المحادثة:** `{chat_id}``\n**⏱ المده:** `{duration}`\n🎧 **مطلوبة بوسطة:** {m.from_user.mention()}",
+                    caption=f"💡 **تم اضافتها الي قائمة التشغيل الدور »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({link})\n💭 **المحادثة:** `{chat_id}`\n🎧 **مطلوبة بوسطة:** {m.from_user.mention()}",
                     reply_markup=keyboard,
                 )
             else:
@@ -157,7 +154,7 @@ async def play(c: Client, m: Message):
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                 await m.reply_photo(
                     photo=f"{IMG_2}",
-                    caption=f"💡 **تم تشغيل الموسيقي.**\n\n🏷 **الاسم:** [{songname}]({link})\n💭 **المحادثة:** `{chat_id}`\n💡 **الحالة:** يعمل`\n**⏱ المده:** `{duration}`\n🎧 **مطلوبة بوسطة:** {requester}",
+                    caption=f"💡 **تم تشغيل الموسيقي.**\n\n🏷 **الاسم:** [{songname}]({link})\n💭 **المحادثة:** `{chat_id}`\n💡 **الحالة:** يعمل\n🎧 **مطلوبة بوسطة:** {requester}",
                     reply_markup=keyboard,
                 )
              except Exception as e:
@@ -177,7 +174,6 @@ async def play(c: Client, m: Message):
                 else:
                     songname = search[0]
                     url = search[1]
-                    duration = search[2]
                     veez, ytlink = await ytdl(url)
                     if veez == 0:
                         await suhu.edit(f"❌ خطأ في مكاتب السورس\n\n» `{ytlink}`")
@@ -190,7 +186,7 @@ async def play(c: Client, m: Message):
                             requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                             await m.reply_photo(
                                 photo=f"{IMG_1}",
-                                caption=f"💡 **تم اضافتها الي قائمة التشغيل الدور »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}``\n**⏱ المده:** `{duration}`\n🎧 **مطلوبة بوسطة:** {requester}",
+                                caption=f"💡 **تم اضافتها الي قائمة التشغيل الدور »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n🎧 **مطلوبة بوسطة:** {requester}",
                                 reply_markup=keyboard,
                             )
                         else:
@@ -207,7 +203,7 @@ async def play(c: Client, m: Message):
                                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                                 await m.reply_photo(
                                     photo=f"{IMG_2}",
-                                    caption=f"💡 **تم تشغيل الموسيقي.**\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n💡 **الحالة:** يعمل`\n**⏱ المده:** `{duration}`\n🎧 **مطلوبة بوسطة:** {requester}",
+                                    caption=f"💡 **تم تشغيل الموسيقي.**\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n💡 **الحالة:** يعمل\n🎧 **مطلوبة بوسطة:** {requester}",
                                     reply_markup=keyboard,
                                 )
                             except Exception as ep:
@@ -228,7 +224,6 @@ async def play(c: Client, m: Message):
             else:
                 songname = search[0]
                 url = search[1]
-                duration = search[2]
                 veez, ytlink = await ytdl(url)
                 if veez == 0:
                     await suhu.edit(f"❌ خطأ في مكاتب السورس\n\n» `{ytlink}`")
@@ -241,7 +236,7 @@ async def play(c: Client, m: Message):
                         )
                         await m.reply_photo(
                             photo=f"{IMG_1}",
-                            caption=f"💡 **تم اضافتها الي قائمة التشغيل الدور »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}``\n**⏱ المده:** `{duration}`\n🎧 **مطلوبة بوسطة:** {requester}",
+                            caption=f"💡 **تم اضافتها الي قائمة التشغيل الدور »** `{pos}`\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n🎧 **مطلوبة بوسطة:** {requester}",
                             reply_markup=keyboard,
                         )
                     else:
@@ -258,7 +253,7 @@ async def play(c: Client, m: Message):
                             requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                             await m.reply_photo(
                                 photo=f"{IMG_2}",
-                                caption=f"💡 **تم تشغيل الموسيقي.**\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n💡 **الحالة:** يعمل\n`**⏱ المده:** `{duration}`\n🎧 **مطلوبة بوسطة:** {requester}",
+                                caption=f"💡 **تم تشغيل الموسيقي.**\n\n🏷 **الاسم:** [{songname}]({url})\n💭 **المحادثة:** `{chat_id}`\n💡 **الحالة:** يعمل\n🎧 **مطلوبة بوسطة:** {requester}",
                                 reply_markup=keyboard,
                             )
                         except Exception as ep:
