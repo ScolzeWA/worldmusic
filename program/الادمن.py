@@ -225,7 +225,7 @@ async def cbresume(_, query: CallbackQuery):
     else:
         await query.answer("❌ لا اقوم بتشغيل شيئ", show_alert=True)
 
-@Client.on_message(command(["ايدي","الايدي"]))
+@Client.on_message(command2(["ايدي","الايدي"]))
 async def showid(_, message: Message):
     await message.delete()
     chat_type = message.chat.type

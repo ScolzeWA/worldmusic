@@ -48,38 +48,32 @@ async def _human_time_duration(seconds):
 
 
 @Client.on_message(command2(["سورس","فحص"]))
-async def start(client: Client, message: Message):
-    await message.reply_photo(
-        photo=f"https://telegra.ph/file/a6c96cdbd066ca2388d06.jpg",
-        caption=f"""ᴘʀᴏɢʀᴀᴍᴍᴇʀ [𝘿𝙀𝙑𝙀𝙇𝙊𝙋𝙀𝙍 ☤ ](https://t.me/WORLD_MUSIC_F) 𖡼\nᴛᴏ ᴄᴏᴍᴍụɴɪᴄᴀᴛᴇ ᴛᴏɢᴇᴛʜᴇʀ 𖡼\nғᴏʟʟᴏᴡ ᴛʜᴇ ʙụᴛᴛᴏɴѕ ʟᴏᴡᴇʀ 𖡼""",
-        reply_markup=InlineKeyboardMarkup(
-         [
+async def alive(client: Client, message: Message):
+    current_time = datetime.utcnow()
+    uptime_sec = (current_time - START_TIME).total_seconds()
+    uptime = await _human_time_duration(int(uptime_sec))
+
+    keyboard = InlineKeyboardMarkup(
+        [
             [
-                InlineKeyboardButton("♡اضف البوت الى مجموعتك♡", url=f"https://t.me/WorldMusicly_Bot?startgroup=true"),
+                InlineKeyboardButton("✨ كروب الدعم", url=f"https://t.me/{GROUP_SUPPORT}"),
+                InlineKeyboardButton(
+                    "قناة السورس", url=f"https://t.me/{UPDATES_CHANNEL}"
+                ),
             ]
-         ]
-     )
-  )
+        ]
+    )
 
-@Client.on_message(command2(["لمطور", f"طور"]))
-async def help(client: Client, message: Message):
+    alive = f"""ᴘʀᴏɢʀᴀᴍᴍᴇʀ [𝘿𝙀𝙑𝙀𝙇𝙊𝙋𝙀𝙍 ☤ ](https://t.me/WORLD_MUSIC_F) 𖡼\nᴛᴏ ᴄᴏᴍᴍụɴɪᴄᴀᴛᴇ ᴛᴏɢᴇᴛʜᴇʀ 𖡼\nғᴏʟʟᴏᴡ ᴛʜᴇ ʙụᴛᴛᴏɴѕ ʟᴏᴡᴇʀ 𖡼"""
+
     await message.reply_photo(
-        photo=f"https://telegra.ph/file/a6c96cdbd066ca2388d06.jpg",
-        caption=f"""◍ مش محتاجين نكتب كلام كتير خش ع اول زرار وانت هتعرف""",
-        reply_markup=InlineKeyboardMarkup(
-         [
-            [
-                InlineKeyboardButton("• 𝘿𝙀𝙑𝙀𝙇𝙊𝙋𝙀𝙍 ☤ ", url=f"https://t.me/WORLD_MUSIC_F"),
-            ],
-            [
-                InlineKeyboardButton("ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/{BOT_USERNAME}?startgroup=true"),
-            ]
-         ]
-     )
-  )
+        photo=f"{ALIVE_IMG}",
+        caption=alive,
+        reply_markup=keyboard,
+    )
 
 
-@Client.on_message(command2(["بنك","السرعه","البنك","السرعة","البنج","بنج"]))
+@Client.on_message(command2(["بنك","السرعه","البنك","السرعة"]))
 async def ping_pong(client: Client, message: Message):
     start = time()
     m_reply = await message.reply_text("جاري قياس البنك...")
