@@ -49,12 +49,15 @@ async def _human_time_duration(seconds):
 
 @Client.on_message(command(["start"]) & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
-    current_time = datetime.utcnow()
-    uptime_sec = (current_time - START_TIME).total_seconds()
-    uptime = await _human_time_duration(int(uptime_sec))
+    await message.reply_text(
+        f"""✨ **مرحبا {message.from_user.mention()} !**\n
+💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **انا بوت استطيع تشغيل الموسيقى والفيديو في محادثتك الصوتية
+💡 **تعلم طريقة تشغيلي واوامر التحكم بي عن طريق  » 📚 الاوامر !**
 
-    keyboard = InlineKeyboardMarkup(
-         [
+🔖 **لتعلم طريقة تشغيلي بمجموعتك اضغط على » ❓اوامر اساسيه **
+تم اضافتك الى جهات الاتصال في الحساب المساعد @{ASSISTANT_NAME}""",
+        reply_markup=InlineKeyboardMarkup(
+            [
                 [
                     InlineKeyboardButton(
                         "➕ أضفني لمجموعتك ➕",
@@ -71,18 +74,14 @@ async def start_(client: Client, message: Message):
                         "👥 كروب الدعم", url=f"https://t.me/{GROUP_SUPPORT}"
                     ),
                     InlineKeyboardButton(
-                        "المالك", url=f"https://t.me/{UPDATES_CHANNEL}"
+                        " SOURCE ELBREVEL", url=f"https://t.me/{UPDATES_CHANNEL}"
                     ),
                 ],
             ]
         ),
-
-    alive = f"""ᴘʀᴏɢʀᴀᴍᴍᴇʀ [𝘿𝙀𝙑𝙀𝙇𝙊𝙋𝙀𝙍 ☤ ](https://t.me/WORLD_MUSIC_F) 𖡼\nᴛᴏ ᴄᴏᴍᴍụɴɪᴄᴀᴛᴇ ᴛᴏɢᴇᴛʜᴇʀ 𖡼\nғᴏʟʟᴏᴡ ᴛʜᴇ ʙụᴛᴛᴏɴѕ ʟᴏᴡᴇʀ 𖡼"""
-    await message.reply_photo(
-        photo=f"{ALIVE_IMG}",
-        caption=alive,
-        reply_markup=keyboard,
+        disable_web_page_preview=True,
     )
+    await USER.add_contact(message.from_user.id, "سكولزي")
     
 
 @Client.on_message(
