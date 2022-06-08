@@ -114,8 +114,8 @@ async def pause(client, m: Message):
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
-        await message.delete()
             await call_py.pause_stream(chat_id)
+            await message.delete()
             await m.reply(
                 "⏸ تم عمل ايقاف مؤقت."
             )
@@ -131,8 +131,8 @@ async def resume(client, m: Message):
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
-        await message.delete()
             await call_py.resume_stream(chat_id)
+            await message.delete()
             await m.reply(
                 "▶️ تم استئناف التشغيل."
             )
@@ -148,8 +148,8 @@ async def mute(client, m: Message):
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
-        await message.delete()
             await call_py.mute_stream(chat_id)
+            await message.delete()
             await m.reply(
                 "🔇 تم كتم الحساب المساعد"
             )
@@ -165,8 +165,8 @@ async def unmute(client, m: Message):
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
-        await message.delete()
             await call_py.unmute_stream(chat_id)
+            await message.delete()
             await m.reply(
                 "🔊 تم الغاء كتم الحساب المساعد"
             )
@@ -187,6 +187,7 @@ async def cbpause(_, query: CallbackQuery):
     if chat_id in QUEUE:
         try:
             await call_py.pause_stream(chat_id)
+            await message.delete()
             await query.edit_message_text(
                 "⏸ تم ايقاف البث مؤقتا", reply_markup=bttn
             )
@@ -206,8 +207,8 @@ async def cbresume(_, query: CallbackQuery):
     chat_id = query.message.chat.id
     if chat_id in QUEUE:
         try:
-        await message.delete()
             await call_py.resume_stream(chat_id)
+            await message.delete()
             await query.edit_message_text(
                 "▶️ جاري استئناف البث", reply_markup=bttn
             )
@@ -273,8 +274,8 @@ async def cbmute(_, query: CallbackQuery):
     chat_id = query.message.chat.id
     if chat_id in QUEUE:
         try:
-        await message.delete()
             await call_py.mute_stream(chat_id)
+            await message.delete()
             await query.edit_message_text(
                 "🔇 تم كتم الحساب المساعد", reply_markup=bttn
             )
@@ -294,8 +295,8 @@ async def cbunmute(_, query: CallbackQuery):
     chat_id = query.message.chat.id
     if chat_id in QUEUE:
         try:
-        await message.delete()
             await call_py.unmute_stream(chat_id)
+            await message.delete()
             await query.edit_message_text(
                 "🔊 تم الغاء كتم الحساب المساعد", reply_markup=bttn
             )
