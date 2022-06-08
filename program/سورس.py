@@ -73,8 +73,9 @@ async def alive(client: Client, message: Message):
     )
 
 
-@Client.on_message(command2(["بنك","السرعه","البنك","السرعة"]))
+@Client.on_message(command2(["بنك","السرعه","البنك","السرعة","بنج","البنج"]))
 async def ping_pong(client: Client, message: Message):
+await message.delete()
     start = time()
     m_reply = await message.reply_text("جاري قياس البنك...")
     delta_ping = time() - start
@@ -86,6 +87,7 @@ async def get_uptime(client: Client, message: Message):
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))
+    await message.delete()
     await message.reply_text(
         "🤖 حاله البوت:\n"
         f"• **وقت التشغيل:** `{uptime}`\n"
