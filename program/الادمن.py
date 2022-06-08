@@ -172,7 +172,6 @@ async def unmute(client, m: Message):
 
 @Client.on_callback_query(filters.regex("cbpause"))
 async def cbpause(_, query: CallbackQuery):
-await message.delete()
     if query.message.sender_chat:
         return await query.answer("انت مسؤول مجهول\n\n» قم بي الغاء خاصية التخفي")
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
