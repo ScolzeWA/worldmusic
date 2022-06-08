@@ -96,8 +96,8 @@ async def skip(client, m: Message):
 @authorized_users_only
 async def stop(client, m: Message):
     chat_id = m.chat.id
-    if chat_id in QUEUE:
     await message.delete()
+    if chat_id in QUEUE:
         try:
             await call_py.leave_group_call(chat_id)
             clear_queue(chat_id)
