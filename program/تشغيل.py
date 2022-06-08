@@ -26,8 +26,8 @@ def ytsearch(query):
                 songname = r["title"][:70]
             else:
                 songname = r["title"]
-            url = f"https://www.youtube.com/watch?v={ytid}"
-        return [songname, url]
+            url = f"https://i.ytimg.com/vi/{data['id']}/hqdefault.jpg"
+        return [songname, url, duration, thumbnail]
     except Exception as e:
         print(e)
         return 0
