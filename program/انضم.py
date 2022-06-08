@@ -33,7 +33,7 @@ async def join_group(client, message):
         )
         return
     await message.reply_text(
-        f"✅ **تم دخول الحساب المساعد بنجاح**",
+        f"✅ **انا جيت اهو شغل وعيش**",
     )
 
 

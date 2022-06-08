@@ -33,7 +33,8 @@ def ytsearch(query):
             else:
                 songname = r["title"]
             url = f"https://www.youtube.com/watch?v={ytid}"
-        return [songname, url]
+            duration = data["duration"]
+        return [songname, duration, url]
     except Exception as e:
         print(e)
         return 0
@@ -142,8 +143,10 @@ async def vplay(c: Client, m: Message):
             try:
                 if replied.video:
                     songname = replied.video.file_name[:70]
+                    duration = replied.video.duration
                 elif replied.document:
                     songname = replied.document.file_name[:70]
+                    duration = replied.document.duration
             except BaseException:
                 songname = "Video"
 
@@ -196,6 +199,7 @@ async def vplay(c: Client, m: Message):
                 else:
                     songname = search[0]
                     url = search[1]
+                    duration = search[2]
                     veez, ytlink = await ytdl(url)
                     if veez == 0:
                         await loser.edit(f"❌ يوجد خطأ في المكتبه\n\n» `{ytlink}`")
@@ -250,6 +254,7 @@ async def vplay(c: Client, m: Message):
             else:
                 songname = search[0]
                 url = search[1]
+                duration = search[2]
                 veez, ytlink = await ytdl(url)
                 if veez == 0:
                     await loser.edit(f"❌ يوجد خطأ بالمكتبه\n\n» `{ytlink}`")

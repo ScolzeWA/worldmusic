@@ -27,7 +27,8 @@ def ytsearch(query):
             else:
                 songname = r["title"]
             url = f"https://www.youtube.com/watch?v={ytid}"
-        return [songname, url]
+            duration = data["duration"]
+        return [songname, duration, url]
     except Exception as e:
         print(e)
         return 0
@@ -127,8 +128,10 @@ async def play(c: Client, m: Message):
                         songname = replied.audio.file_name[:70]
                     else:
                         songname = "Audio"
+                        duration = replied.audio.duration
             elif replied.voice:
                 songname = "Voice Note"
+                duration = replied.voice.duration
             if chat_id in QUEUE:
                 pos = add_to_queue(chat_id, songname, dl, link, "Audio", 0)
                 await suhu.delete()
@@ -171,6 +174,7 @@ async def play(c: Client, m: Message):
                 else:
                     songname = search[0]
                     url = search[1]
+                    duration = search[2]
                     veez, ytlink = await ytdl(url)
                     if veez == 0:
                         await suhu.edit(f"❌ خطأ في مكاتب السورس\n\n» `{ytlink}`")
@@ -221,6 +225,7 @@ async def play(c: Client, m: Message):
             else:
                 songname = search[0]
                 url = search[1]
+                duration = search[2]
                 veez, ytlink = await ytdl(url)
                 if veez == 0:
                     await suhu.edit(f"❌ خطأ في مكاتب السورس\n\n» `{ytlink}`")
