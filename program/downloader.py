@@ -138,12 +138,12 @@ async def vsong(client, message):
 
 @Client.on_message(command(["lyric", f"lyric@{bn}"]))
 async def lyrics(_, message):
-await message.delete()
     try:
         if len(message.command) < 2:
             await message.reply_text("» **اعطني اسم المغني والاغنيه ايضا.**")
             return
         query = message.text.split(None, 1)[1]
+        await message.delete()
         rep = await message.reply_text("🔎 **يتم البحث عن الكلمات...**")
         resp = requests.get(
             f"https://api-tede.herokuapp.com/api/lirik?l={query}"
