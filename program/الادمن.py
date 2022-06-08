@@ -98,9 +98,9 @@ async def stop(client, message):
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
+            await message.delete()
             await call_py.leave_group_call(chat_id)
             clear_queue(chat_id)
-            await message.delete()
             await m.reply("حاضر هسكت اهو🥲")
         except Exception as e:
             await m.reply(f"🚫 خطأ:\n\n`{e}`")
