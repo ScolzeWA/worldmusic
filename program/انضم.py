@@ -7,9 +7,7 @@ from pyrogram import Client, filters
 from pyrogram.errors import UserAlreadyParticipant
 
 
-@Client.on_message(
-    command(["userbotjoin", f"userbotjoin@{BOT_USERNAME}"]) & ~filters.private & ~filters.bot
-)
+@Client.on_message(command2(["انضم"]) & ~filters.private & ~filters.bot)
 @authorized_users_only
 @errors
 async def join_group(client, message):
@@ -29,10 +27,10 @@ async def join_group(client, message):
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"🛑 حدث خطأ 🛑 \n\n**البوت المساعد لم يستطع الدخول لكثرة الطلبات**"
+            "🛑 حدث خطأ 🛑 \n\n**البوت المساعد لم يستطع الدخول لكثرة الطلبات**"
             "\n\n**حاول مرة اخري او قم بإضافته يدويا**\n\nيمكنك ارسال اي رساله للحساب المساعد وسيقوم باضافتك لجهات الاتصال"
             f"\nمعرف الحساب المساعد @{ASSISTANT_NAME}",
-            )
+        )
         return
     await message.reply_text(
         f"✅ **انا جيت اهو شغل وعيش**",
