@@ -41,7 +41,7 @@ async def join_group(client, message):
 @USER.on_message(command2(["غادر"]) & filters.group)
 @authorized_users_only
 async def leave_one(client, message):
-await message.delete()
+    await message.delete()
     try:
         await message.reply_text("✅ قام الحساب المساعد بالخروج من المحادثة")
         await USER.leave_chat(message.chat.id)
@@ -56,7 +56,7 @@ await message.delete()
 @Client.on_message(command2(["مغادرة"]))
 @sudo_users_only
 async def leave_all(client, message):
-await message.delete()
+    await message.delete()
     if message.from_user.id not in SUDO_USERS:
         return
 
