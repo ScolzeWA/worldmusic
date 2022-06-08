@@ -46,7 +46,6 @@ async def update_admin(client, message):
 @Client.on_message(command2(["تخطي","خطي"]) & other_filters)
 @authorized_users_only
 async def skip(client, m: Message):
-await message.delete()
     keyboard = InlineKeyboardMarkup(
         [
             [
