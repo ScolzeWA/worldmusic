@@ -47,8 +47,7 @@ async def update_admin(client, message):
 @Client.on_message(command(["skip", f"skip@{BOT_USERNAME}", "vskip"]) & other_filters)
 @authorized_users_only
 async def skip(client, m: Message):
-await m.delete()
-
+    await m.delete()
     keyboard = InlineKeyboardMarkup(
         [
             [
@@ -101,7 +100,7 @@ await m.delete()
 )
 @authorized_users_only
 async def stop(client, m: Message):
-await m.delete()
+    await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -119,7 +118,7 @@ await m.delete()
 )
 @authorized_users_only
 async def pause(client, m: Message):
-await m.delete()
+    await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -138,7 +137,7 @@ await m.delete()
 )
 @authorized_users_only
 async def resume(client, m: Message):
-await m.delete()
+    await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -157,7 +156,7 @@ await m.delete()
 )
 @authorized_users_only
 async def mute(client, m: Message):
-await m.delete()
+    await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -176,7 +175,7 @@ await m.delete()
 )
 @authorized_users_only
 async def unmute(client, m: Message):
-await m.delete()
+    await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
