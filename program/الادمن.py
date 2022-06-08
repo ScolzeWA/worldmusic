@@ -62,7 +62,6 @@ async def skip(client, m: Message):
 
     chat_id = m.chat.id
     if len(m.command) < 2:
-    await message.delete()
         op = await skip_current_song(chat_id)
         if op == 0:
             await m.reply("❌ لا يوحد قائمة تشغيل")
