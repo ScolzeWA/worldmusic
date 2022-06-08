@@ -75,8 +75,8 @@ async def alive(client: Client, message: Message):
 
 @Client.on_message(command2(["بنك","السرعه","البنك","السرعة","بنج","البنج"]))
 async def ping_pong(client: Client, message: Message):
-await message.delete()
     start = time()
+    await message.delete()
     m_reply = await message.reply_text("جاري قياس البنك...")
     delta_ping = time() - start
     await m_reply.edit_text("🏓 بنك\n" f"⚡️ `{delta_ping * 1000:.3f} ms`")
