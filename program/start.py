@@ -47,20 +47,14 @@ async def _human_time_duration(seconds):
             parts.append("{} {}{}".format(amount, unit, "" if amount == 1 else ""))
     return ", ".join(parts)
 
-
 @Client.on_message(command(["start"]) & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
-    await message.delete()
-    await message.reply_photo(
-        photo=f"{ALIVE_IMG}",
-        caption=f"""✨ **مرحبا {message.from_user.mention()} !**\n
-💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **انا بوت استطيع تشغيل الموسيقى والفيديو في محادثتك الصوتية
-💡 **تعلم طريقة تشغيلي واوامر التحكم بي عن طريق  » 📚 الاوامر !**
+    current_time = datetime.utcnow()
+    uptime_sec = (current_time - START_TIME).total_seconds()
+    uptime = await _human_time_duration(int(uptime_sec))
 
-🔖 **لتعلم طريقة تشغيلي بمجموعتك اضغط على » ❓اوامر اساسيه **
-تم اضافتك الى جهات الاتصال في الحساب المساعد @{ASSISTANT_NAME}""",
-        reply_markup=InlineKeyboardMarkup(
-            [
+    keyboard = InlineKeyboardMarkup(
+         [
                 [
                     InlineKeyboardButton(
                         "➕ أضفني لمجموعتك ➕",
@@ -82,10 +76,15 @@ async def start_(client: Client, message: Message):
                 ],
             ]
         ),
-        disable_web_page_preview=True,
-    )
-    await USER.add_contact(message.from_user.id, "𝑾𝑶𝑹𝑳𝑫 𝑴𝑼𝑺𝑰𝑪 💗ˣ")
 
+    alive = f"""ᴘʀᴏɢʀᴀᴍᴍᴇʀ [𝘿𝙀𝙑𝙀𝙇𝙊𝙋𝙀𝙍 ☤ ](https://t.me/WORLD_MUSIC_F) 𖡼\nᴛᴏ ᴄᴏᴍᴍụɴɪᴄᴀᴛᴇ ᴛᴏɢᴇᴛʜᴇʀ 𖡼\nғᴏʟʟᴏᴡ ᴛʜᴇ ʙụᴛᴛᴏɴѕ ʟᴏᴡᴇʀ 𖡼"""
+
+    await message.reply_photo(
+        photo=f"{ALIVE_IMG}",
+        caption=alive,
+        reply_markup=keyboard,
+    )
+    
 
 @Client.on_message(
     command(["alive", f"alive@{BOT_USERNAME}"]) & ~filters.edited
