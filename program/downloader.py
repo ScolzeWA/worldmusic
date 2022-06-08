@@ -38,6 +38,7 @@ ydl_opts = {
 @Client.on_message(command(["song", f"song@{bn}"]) & ~filters.edited)
 def song(_, message):
     query = " ".join(message.command[1:])
+    await message.delete()
     m = message.reply("🔎 يتم البحث عن الأغنية ...")
     ydl_ops = {"format": "bestaudio[ext=m4a]"}
     try:
@@ -114,6 +115,7 @@ async def vsong(client, message):
     except Exception as e:
         print(e)
     try:
+    await message.delete()
         msg = await message.reply("📥 **يتم التحميل...**")
         with YoutubeDL(ydl_opts) as ytdl:
             ytdl_data = ytdl.extract_info(link, download=True)
@@ -139,6 +141,7 @@ async def vsong(client, message):
 async def lyrics(_, message):
     try:
         if len(message.command) < 2:
+        await message.delete()
             await message.reply_text("» **اعطني اسم المغني والاغنيه ايضا.**")
             return
         query = message.text.split(None, 1)[1]
