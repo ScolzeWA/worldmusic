@@ -51,8 +51,9 @@ async def _human_time_duration(seconds):
 @Client.on_message(command(["start"]) & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
     await message.delete()
-    await message.reply_text(
-        f"""✨ **مرحبا {message.from_user.mention()} !**\n
+    await message.reply_photo(
+        photo=f"{ALIVE_IMG}",
+        caption=f"""✨ **مرحبا {message.from_user.mention()} !**\n
 💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **انا بوت استطيع تشغيل الموسيقى والفيديو في محادثتك الصوتية
 💡 **تعلم طريقة تشغيلي واوامر التحكم بي عن طريق  » 📚 الاوامر !**
 
