@@ -91,8 +91,8 @@ async def play(c: Client, m: Message):
         await m.reply_text("قم بي اعطائي الصلاحية التالية:" + "\n\n» ❌ __حظر المستخدمين__")
         return
     try:
-        ubot = await user.get_me()
-        b = await c.get_chat_member(chat_id, ubot.id)
+        ubot = (await user.get_me()).id
+        b = await c.get_chat_member(chat_id, ubot)
         if b.status == "kicked":
             await m.reply_text(
                 f"@{ASSISTANT_NAME} محظور في المجموعة {m.chat.title}\n\n» قم بي الغاء حظره و اضافتة الي المجموعة"
