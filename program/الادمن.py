@@ -94,7 +94,7 @@ async def skip(client, m: Message):
         
 @Client.on_message(command2(["اسكت","ايقاف","انهاء"]) & other_filters)
 @authorized_users_only
-async def stop(client, m: message):
+async def stop(client, m: Message):
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
