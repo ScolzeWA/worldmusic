@@ -94,12 +94,11 @@ async def skip(client, m: Message):
         
 @Client.on_message(command2(["اسكت","ايقاف","انهاء"]) & other_filters)
 @authorized_users_only
-async def stop(client, message):
+async def stop(client, m: Message):
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
             await call_py.leave_group_call(chat_id)
-            await message.delete()
             clear_queue(chat_id)
             await m.reply("حاضر هسكت اهو🥲")
         except Exception as e:
@@ -147,7 +146,6 @@ async def mute(client, m: Message):
     if chat_id in QUEUE:
         try:
             await call_py.mute_stream(chat_id)
-            await message.delete()
             await m.reply(
                 "🔇 تم كتم الحساب المساعد"
             )
@@ -164,7 +162,6 @@ async def unmute(client, m: Message):
     if chat_id in QUEUE:
         try:
             await call_py.unmute_stream(chat_id)
-            await message.delete()
             await m.reply(
                 "🔊 تم الغاء كتم الحساب المساعد"
             )
@@ -185,7 +182,6 @@ async def cbpause(_, query: CallbackQuery):
     if chat_id in QUEUE:
         try:
             await call_py.pause_stream(chat_id)
-            await message.delete()
             await query.edit_message_text(
                 "⏸ تم ايقاف البث مؤقتا", reply_markup=bttn
             )
@@ -206,7 +202,6 @@ async def cbresume(_, query: CallbackQuery):
     if chat_id in QUEUE:
         try:
             await call_py.resume_stream(chat_id)
-            await message.delete()
             await query.edit_message_text(
                 "▶️ جاري استئناف البث", reply_markup=bttn
             )
@@ -273,7 +268,6 @@ async def cbmute(_, query: CallbackQuery):
     if chat_id in QUEUE:
         try:
             await call_py.mute_stream(chat_id)
-            await message.delete()
             await query.edit_message_text(
                 "🔇 تم كتم الحساب المساعد", reply_markup=bttn
             )
@@ -294,7 +288,6 @@ async def cbunmute(_, query: CallbackQuery):
     if chat_id in QUEUE:
         try:
             await call_py.unmute_stream(chat_id)
-            await message.delete()
             await query.edit_message_text(
                 "🔊 تم الغاء كتم الحساب المساعد", reply_markup=bttn
             )
