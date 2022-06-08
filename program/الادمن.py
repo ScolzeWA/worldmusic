@@ -47,6 +47,7 @@ async def update_admin(client, message):
 @Client.on_message(command2(["تخطي","خطي"]) & other_filters)
 @authorized_users_only
 async def skip(client, m: Message):
+    await m.delete()
     keyboard = InlineKeyboardMarkup(
         [
             [
@@ -128,6 +129,7 @@ async def pause(client, m: Message):
 @Client.on_message(command2(["استئناف","استكمال","استكمل","استئنف","كمل"]) & other_filters)
 @authorized_users_only
 async def resume(client, m: Message):
+    await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -144,6 +146,7 @@ async def resume(client, m: Message):
 @Client.on_message(command2(["كتم_المساعد","كتم المساعد","ميوت"]) & other_filters)
 @authorized_users_only
 async def mute(client, m: Message):
+     await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -160,6 +163,7 @@ async def mute(client, m: Message):
 @Client.on_message(command2(["الغاء كتم المساعد","فك كتم المساعد"]) & other_filters)
 @authorized_users_only
 async def unmute(client, m: Message):
+   await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:

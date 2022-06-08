@@ -38,6 +38,7 @@ async def update_admin(client, message):
     for u in new_ads:
         new_admins.append(u.user.id)
     admins[message.chat.id] = new_admins
+    await message.delete()
     await message.reply_text(
         "✅ ** تم تحديث قائمة الادمن **"
     )
@@ -46,6 +47,7 @@ async def update_admin(client, message):
 @Client.on_message(command(["skip", f"skip@{BOT_USERNAME}", "vskip"]) & other_filters)
 @authorized_users_only
 async def skip(client, m: Message):
+await m.delete()
 
     keyboard = InlineKeyboardMarkup(
         [
@@ -99,6 +101,7 @@ async def skip(client, m: Message):
 )
 @authorized_users_only
 async def stop(client, m: Message):
+await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -116,6 +119,7 @@ async def stop(client, m: Message):
 )
 @authorized_users_only
 async def pause(client, m: Message):
+await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -134,6 +138,7 @@ async def pause(client, m: Message):
 )
 @authorized_users_only
 async def resume(client, m: Message):
+await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -152,6 +157,7 @@ async def resume(client, m: Message):
 )
 @authorized_users_only
 async def mute(client, m: Message):
+await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -170,6 +176,7 @@ async def mute(client, m: Message):
 )
 @authorized_users_only
 async def unmute(client, m: Message):
+await m.delete()
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:

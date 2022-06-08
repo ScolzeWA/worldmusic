@@ -37,6 +37,7 @@ ydl_opts = {
 
 @Client.on_message(command(["song", f"song@{bn}"]) & ~filters.edited)
 def song(_, message):
+await message.delete()
     query = " ".join(message.command[1:])
     m = message.reply("🔎 يتم البحث عن الأغنية ...")
     ydl_ops = {"format": "bestaudio[ext=m4a]"}
@@ -90,6 +91,7 @@ def song(_, message):
     command(["vsong", f"vsong@{bn}", "video", f"video@{bn}"]) & ~filters.edited
 )
 async def vsong(client, message):
+await message.delete()
     ydl_opts = {
         "format": "best",
         "keepvideo": True,
@@ -137,6 +139,7 @@ async def vsong(client, message):
 
 @Client.on_message(command(["lyric", f"lyric@{bn}"]))
 async def lyrics(_, message):
+await message.delete()
     try:
         if len(message.command) < 2:
             await message.reply_text("» **اعطني اسم المغني والاغنيه ايضا.**")
