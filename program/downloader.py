@@ -115,7 +115,6 @@ async def vsong(client, message):
     except Exception as e:
         print(e)
     try:
-    await message.delete()
         msg = await message.reply("📥 **يتم التحميل...**")
         with YoutubeDL(ydl_opts) as ytdl:
             ytdl_data = ytdl.extract_info(link, download=True)
