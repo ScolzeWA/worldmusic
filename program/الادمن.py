@@ -94,7 +94,7 @@ async def skip(client, m: Message):
         
 @Client.on_message(command2(["اسكت","ايقاف","انهاء"]) & other_filters)
 @authorized_users_only
-async def stop(_, message: Message):
+async def stop(client, m: message):
     chat_id = m.chat.id
     if chat_id in QUEUE:
         try:
@@ -123,7 +123,7 @@ async def pause(client, m: Message):
         await m.reply("❌ لا اقوم بتشغيل اي شيئ")
 
 
-@Client.on_message(command2(["استئناف","استكمال","استكمل","استئنف"]) & other_filters)
+@Client.on_message(command2(["استئناف","استكمال","استكمل","استئنف","كمل"]) & other_filters)
 @authorized_users_only
 async def resume(client, m: Message):
     chat_id = m.chat.id
