@@ -90,7 +90,6 @@ def song(_, message):
     command(["vsong", f"vsong@{bn}", "video", f"video@{bn}"]) & ~filters.edited
 )
 async def vsong(client, message):
-await message.delete()
     ydl_opts = {
         "format": "best",
         "keepvideo": True,
