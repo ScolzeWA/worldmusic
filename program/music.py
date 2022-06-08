@@ -166,7 +166,6 @@ async def play(c: Client, m: Message):
                     "» قم بي الرد علي ملف صوتي او اعطائي شيئ للبحث"
                 )
             else:
-                await message.delete()
                 suhu = await m.reply("🔎 **جاري البحث...**")
                 query = m.text.split(None, 1)[1]
                 search = ytsearch(query)
