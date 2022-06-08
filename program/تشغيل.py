@@ -17,7 +17,9 @@ from pytgcalls.types.input_stream import AudioPiped
 from youtubesearchpython import VideosSearch
 
 
-search = VideosSearch(query, limit=1).result()
+def ytsearch(query: str):
+    try:
+        search = VideosSearch(query, limit=1).result()
         data = search["result"][0]
         songname = data["title"]
         url = data["link"]
