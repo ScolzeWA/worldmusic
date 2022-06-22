@@ -15,9 +15,14 @@ from config import (
 from program import __version__
 from driver.filters import command, other_filters
 from pyrogram import Client, filters
-from pyrogram import __version__ as pyrover
 from pytgcalls import (__version__ as pytover)
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from driver.decorators import sudo_users_only
+from driver.database.dbchat import add_served_chat, is_served_chat
+from driver.database.dbpunish import is_gbanned_user
+from pyrogram import Client, filters, __version__ as pyrover
+from pyrogram.errors import FloodWait, MessageNotModified
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ChatJoinRequest
+
 
 __major__ = 0
 __minor__ = 2
@@ -47,10 +52,9 @@ async def _human_time_duration(seconds):
             parts.append("{} {}{}".format(amount, unit, "" if amount == 1 else ""))
     return ", ".join(parts)
 
-@Client.on_message(command(["start"]) & filters.private & ~filters.edited)
+@Client.on_message(command("start") & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
     await message.delete()
-    await message.reply_text(
     await message.reply_photo(
         photo=f"{ALIVE_IMG}",
         caption=f"""**━━━━━━━━━━━━
@@ -68,26 +72,28 @@ async def start_(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "➕ أضفني لمجموعتك ➕",
-                        url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
+                        "ضيـف البـوت لمجمـوعتـك ✅",
+                        url=f"https://t.me/{BOT_USERNAME}?startgroup=true"
                     )
                 ],
-                [InlineKeyboardButton("❓ الاوامر الاساسيه", callback_data="cbhowtouse")],
+                [InlineKeyboardButton("الاوامر", callback_data="cbhowtouse")],
                 [
-                    InlineKeyboardButton("📚 الاوامر", callback_data="cbcmds"),
+                     InlineKeyboardButton(
+                        "الاوامر", url=f"https://telegra.ph/%F0%9D%99%B2%E1%B4%8F%E1%B4%8D%E1%B4%8D%E1%B4%80%C9%B4%E1%B4%85s-04-06"),
                     InlineKeyboardButton("❤️ المطور", url=f"https://t.me/{OWNER_NAME}"),
                 ],
                 [
                     InlineKeyboardButton(
-                        "👥 كروب الدعم", url=f"https://t.me/{GROUP_SUPPORT}"
+                        "👥 جروب الدعم", url=f"https://t.me/{GROUP_SUPPORT}"
                     ),
                     InlineKeyboardButton(
-                        " SOURCE 𝑾𝑶𝑹𝑳𝑫 𝑴𝑼𝑺𝑰𝑪 💗ˣ", url=f"https://t.me/{UPDATES_CHANNEL}"
+                        "📣 قناة البوت", url=f"https://t.me/{UPDATES_CHANNEL}"
                     ),
                 ],
             ]
         ),
-
+    )
+    
 @Client.on_message(
     command(["alive", f"alive@{BOT_USERNAME}"]) & ~filters.edited
 )
