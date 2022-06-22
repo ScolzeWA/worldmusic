@@ -17,8 +17,6 @@ from driver.filters import command, other_filters
 from pyrogram import Client, filters
 from pytgcalls import (__version__ as pytover)
 from driver.decorators import sudo_users_only
-from driver.database.dbchat import add_served_chat, is_served_chat
-from driver.database.dbpunish import is_gbanned_user
 from pyrogram import Client, filters, __version__ as pyrover
 from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message, ChatJoinRequest
