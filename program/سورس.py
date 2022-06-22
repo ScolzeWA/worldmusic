@@ -47,7 +47,7 @@ async def _human_time_duration(seconds):
     return ", ".join(parts)
 
 
-@Client.on_message(command2(["سورس","فحص"]))
+@Client.on_message(command2(["سورس","فحص","السورس"]))
 async def alive(client: Client, message: Message):
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
@@ -71,6 +71,24 @@ async def alive(client: Client, message: Message):
         caption=alive,
         reply_markup=keyboard,
     )
+    
+@Client.on_message(command2(["المطور","مطور"]) & filters.group & ~filters.edited)
+async def help(client: Client, message: Message):
+    await message.delete()
+    await message.reply_photo(
+        photo=f"{DEV_PHOTO}",
+        caption=f"""◍ مش محتاجين نكتب كلام كتير خش ع اول زرار وانت هتعرف""",
+        reply_markup=InlineKeyboardMarkup(
+         [
+            [
+                InlineKeyboardButton("• 𝘿𝙀𝙑𝙀𝙇𝙊𝙋𝙀𝙍 ☤ ", url=f"https://t.me/WORLD_MUSIC_F"),
+            ],
+            [
+                InlineKeyboardButton("ضيـف البـوت لمجمـوعتـك ✅", url=f"https://t.me/{BOT_USERNAME}?startgroup=true"),
+            ]
+         ]
+     )
+  )
 
 
 @Client.on_message(command2(["بنك","السرعه","البنك","السرعة","بنج","البنج"]))
@@ -84,6 +102,7 @@ async def ping_pong(client: Client, message: Message):
 
 @Client.on_message(command2(["مدة التشغيل","مده التشغيل","وقت التشغيل"]))
 async def get_uptime(client: Client, message: Message):
+    await message.delete()
     current_time = datetime.utcnow()
     uptime_sec = (current_time - START_TIME).total_seconds()
     uptime = await _human_time_duration(int(uptime_sec))

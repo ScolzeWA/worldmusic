@@ -13,7 +13,7 @@ from driver.decorators import sudo_users_only, humanbytes
 
 # FETCH SYSINFO
 
-@Client.on_message(command2(["النظام","السيرفر","معلومات_السيرفر"]))
+@Client.on_message(command2(["النظام","السيرفر","معلومات_السيرفر","سيرفر"]))
 @sudo_users_only
 async def give_sysinfo(client, message):
     splatform = platform.system()

@@ -50,7 +50,7 @@ async def ytdl(link):
         return 0, stderr.decode()
 
 
-@Client.on_message(command2(["تشغيل","شغل_صوت","صوت_تشغيل","شغل"]) & other_filters)
+@Client.on_message(command2(["تشغيل","شغل"]) & other_filters)
 async def play(c: Client, m: Message):
     await m.delete()
     replied = m.reply_to_message

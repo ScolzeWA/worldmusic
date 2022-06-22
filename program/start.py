@@ -49,13 +49,21 @@ async def _human_time_duration(seconds):
 
 @Client.on_message(command(["start"]) & filters.private & ~filters.edited)
 async def start_(client: Client, message: Message):
+    await message.delete()
     await message.reply_text(
-        f"""✨ **مرحبا {message.from_user.mention()} !**\n
-💭 [{BOT_NAME}](https://t.me/{BOT_USERNAME}) **انا بوت استطيع تشغيل الموسيقى والفيديو في محادثتك الصوتية
-💡 **تعلم طريقة تشغيلي واوامر التحكم بي عن طريق  » 📚 الاوامر !**
+    await message.reply_photo(
+        photo=f"{ALIVE_IMG}",
+        caption=f"""**━━━━━━━━━━━━
+اهـلا يـبـنـي.؟ {message.from_user.mention()} !
+مـرحبآ بـك انــا بــوت اقـوم بــتـشـغـيـل الاغــانــي فـي الـمـڪـالـمـه الـصـوتـية .🤔❤؟
+يمكنني التشغيل بصوت رائع وبدون اي مشاكل او تقطيع في الاغنيه
+ +اضفني الى مجموعتك وارفعني رول بشڪل مع ڪامل الصلاحيات
+ البوت يشتغل بالاوامر عربي وانجليزي
+ لانضمام الحساب المساعد لتشغيل البوت اكتب انضم
 
-🔖 **لتعلم طريقة تشغيلي بمجموعتك اضغط على » ❓اوامر اساسيه **
-تم اضافتك الى جهات الاتصال في الحساب المساعد @{ASSISTANT_NAME}""",
+
+  لمعرفة استخدامي بشڪل صحيح اضغط علي زر الاوامر. 🤔𝑫𝑬𝑽 [𝑾𝑶𝑹𝑳𝑫 𝑴𝑼𝑺𝑰𝑪 💗ˣ](t.me/WORLD_MUSIC_F)
+━━━━━━━━━━━━━━━━━━**""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
@@ -74,15 +82,11 @@ async def start_(client: Client, message: Message):
                         "👥 كروب الدعم", url=f"https://t.me/{GROUP_SUPPORT}"
                     ),
                     InlineKeyboardButton(
-                        " SOURCE ELBREVEL", url=f"https://t.me/{UPDATES_CHANNEL}"
+                        " SOURCE 𝑾𝑶𝑹𝑳𝑫 𝑴𝑼𝑺𝑰𝑪 💗ˣ", url=f"https://t.me/{UPDATES_CHANNEL}"
                     ),
                 ],
             ]
         ),
-        disable_web_page_preview=True,
-    )
-    await USER.add_contact(message.from_user.id, "سكولزي")
-    
 
 @Client.on_message(
     command(["alive", f"alive@{BOT_USERNAME}"]) & ~filters.edited
@@ -95,7 +99,7 @@ async def alive(client: Client, message: Message):
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("✨ كروب الدعم", url=f"https://t.me/{GROUP_SUPPORT}"),
+                InlineKeyboardButton("✨ جروب الدعم", url=f"https://t.me/{GROUP_SUPPORT}"),
                 InlineKeyboardButton(
                     "قناه السورس", url=f"https://t.me/{UPDATES_CHANNEL}"
                 ),
